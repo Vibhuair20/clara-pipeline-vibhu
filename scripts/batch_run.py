@@ -38,7 +38,41 @@ def run_batch():
             print(f"\nRunning: {' '.join(cmd)}")
             subprocess.run(cmd)
 
-    print("\nBatch processing complete. Check outputs/accounts/ directory.")
+    print("\nBatch processing complete. Generating summary_metrics.json for the Dashboard...")
+
+    # Bonus: Generate summary_metrics.json for the Dashboard UI
+    import json
+    metrics = {
+        "metrics": {
+            "demo_files_processed": len(demo_files),
+            "onboarding_files_processed": len(onboarding_files),
+        },
+        "accounts": {}
+    }
+    
+    accounts_dir = base_dir / "outputs" / "accounts"
+    if accounts_dir.exists():
+        for acc_folder in accounts_dir.iterdir():
+            if acc_folder.is_dir():
+                acc_name = acc_folder.name
+                metrics["accounts"][acc_name] = {"v1": None, "v2": None, "changelog": None}
+                
+                v1_spec = acc_folder / "v1" / "agent_spec.json"
+                if v1_spec.exists():
+                    metrics["accounts"][acc_name]["v1"] = json.loads(v1_spec.read_text())
+                
+                v2_spec = acc_folder / "v2" / "agent_spec.json"
+                if v2_spec.exists():
+                    metrics["accounts"][acc_name]["v2"] = json.loads(v2_spec.read_text())
+                    
+                changelog = acc_folder / "changelog.md"
+                if changelog.exists():
+                    metrics["accounts"][acc_name]["changelog"] = changelog.read_text()
+
+    with open(base_dir / "outputs" / "summary_metrics.json", "w") as f:
+        json.dump(metrics, f, indent=2)
+
+    print("Dashboard metrics generated: outputs/summary_metrics.json")
 
 if __name__ == "__main__":
     run_batch()
