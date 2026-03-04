@@ -1,0 +1,25 @@
+{
+  "account_id": "benselectricsolutionsteam",
+  "company_name": "Ben's Electric Solutions Team",
+  "business_hours": "Monday to Friday, 8:00 AM to 4:30 PM",
+  "office_address": null,
+  "services_supported": [],
+  "emergency_definition": [
+    "Calls from existing builders for emergencies after hours",
+    "Calls from G&M Pressure Washing (a property management company managing Chevron and Esso gas stations that run 24/7) for emergencies after hours"
+  ],
+  "emergency_routing_rules": "For existing builders and G&M Pressure Washing, emergency calls after hours will be patched through to Ben. For all other after-hours emergencies, the caller will be informed that someone will get back to them the next business day.",
+  "non_emergency_routing_rules": "During office hours, new clients, small jobs, and service calls will be handled by Clara. After hours, non-emergency callers will be informed that someone will get back to them the next business day.",
+  "call_transfer_rules": "Clara can transfer calls to Ben's second personal phone number if a caller specifically requests to speak with him. Calls should be patched through to minimize customer friction.",
+  "integration_constraints": "None mentioned.",
+  "after_hours_flow_summary": "For emergency calls from existing builders or G&M Pressure Washing (a property manager for Chevron and Esso gas stations), Clara will patch the call through to Ben. For all other after-hours calls (including non-emergencies), Clara will inform the caller that someone will get back to them the next business day.",
+  "office_hours_flow_summary": "Clara Answers will be the first point of contact for new clients, small jobs, and service calls. Initially, calls will be forwarded to Clara if Ben does not answer or declines a call on his main business line. Once Ben sets up his second number, Clara will be the primary contact. If asked, Clara will mention the service call fee ($115 for the call-out fee to get to the site, then $98 per hour in half-hour increments). If a caller specifically requests to speak with Ben, Clara will transfer the call to his second number.",
+  "questions_or_unknowns": [
+    "What are the specific services provided by 'Ben's Electric Solutions Team'?",
+    "What is the exact timezone for the business hours (Mon-Fri, 8:00 AM - 4:30 PM)?",
+    "What is the full physical office address for Ben's Electric Solutions Team?",
+    "What are the specific timeout, retry, and failure message rules for call transfers?",
+    "What is the exact second phone number Ben will use for call transfers?"
+  ],
+  "notes": "Ben uses an Android phone. Notifications for new calls (email and SMS) will be sent to info@benselectricsolutionsteam.com and his main business line. Clara can be turned off and on as needed. The initial setup will forward calls to Clara if Ben doesn't answer or declines on his main business line. Once Ben's second number is active, Clara will be the first point of contact and transfer to the second number if needed."
+}

@@ -1,0 +1,39 @@
+{
+  "account_id": "benselectricsolution",
+  "company_name": "Ben's Electric Solutions",
+  "business_hours": "Standard business hours start at 8 AM, Monday to Friday. After-hours calls are handled by Clara or routed to Ben for emergencies.",
+  "office_address": "17119 Sundown Road S.E. Calgary, Alberta T2X3D4",
+  "services_supported": [
+    "electrical services",
+    "service calls",
+    "small jobs",
+    "odd jobs",
+    "renovations",
+    "troubleshooting",
+    "new custom home electrical projects",
+    "tenant infill electrical improvements",
+    "tenant improvement electrical projects",
+    "EV charger installation",
+    "hot tub electrical hookups",
+    "panel changes",
+    "electrical service maintenance",
+    "LED lighting upgrades",
+    "generator connection for hot tubs"
+  ],
+  "emergency_definition": [
+    "pumps go down for gas stations (specific property managers)",
+    "emergencies for regular property managers",
+    "emergencies for general contractors"
+  ],
+  "emergency_routing_rules": "Clara automatically routes emergency calls directly to Ben, or to the designated person on call if configured.",
+  "non_emergency_routing_rules": "Clara answers general business calls, collects customer and job details, and records the information in a dashboard. Notifications (email/text) are sent to Ben, who can then assign the lead to a team member. Certain specified calls (e.g., from personal contacts or VIP customers) are directly forwarded to Ben without screening.",
+  "call_transfer_rules": "Clara screens calls for validity before transferring to Ben. Personal numbers (e.g., Ben's wife) and certain preferred customer numbers are directly forwarded without screening. Emergency calls are automatically transferred directly to Ben or the person on call. No rules explicitly stated for timeouts, retries, or what to say if transfer fails.",
+  "integration_constraints": "None explicitly stated. Integration with Jobber is in progress.",
+  "after_hours_flow_summary": "Clara answers after-hours calls, collects job details, and books appointments for the next business day starting at 8 AM. For emergencies, calls are routed directly to Ben or the on-call person. During holidays, Clara handles incoming calls and schedules jobs for when the office reopens.",
+  "office_hours_flow_summary": "Clara acts as a virtual receptionist, answering calls, collecting customer and job information (including technical details for electrical work like hot tub wiring or EV chargers), and filtering out sales calls. It can suggest appointment times. All call details (recordings, transcripts, summaries) are logged in a dashboard, and notifications are sent via email and text. Ben reviews the leads and assigns them to team members.",
+  "questions_or_unknowns": [
+    "Exact end time for business hours",
+    "Timezone for business hours"
+  ],
+  "notes": "Ben is a sole proprietor planning to incorporate this year. Currently manages all admin tasks but is hiring an operations manager/estimator (Greg). Uses Jobber as a CRM. Previously had a negative experience with a human virtual assistant. Ben is the primary contact for emergencies. Wants Clara to filter sales calls and summarize interactions with difficult contractors."
+}

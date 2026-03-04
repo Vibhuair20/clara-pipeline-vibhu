@@ -1,0 +1,29 @@
+{
+  "account_id": "benselectricsolutionsteam",
+  "company_name": "Ben's Electric Solutions Team",
+  "business_hours": "Monday to Friday, 8:00 AM - 5:00 PM",
+  "office_address": null,
+  "services_supported": [
+    "Electrical service calls",
+    "Small electrical jobs",
+    "New client inquiries for electrical services"
+  ],
+  "emergency_definition": [
+    "Emergencies for client GNM Pressure Washing's gas station properties (running 24/7)"
+  ],
+  "emergency_routing_rules": "For emergencies related to GNM Pressure Washing's managed Chevron and Esso gas stations after hours, calls will be patched directly to Ben. Caller identity and context (e.g., Shelley from GNM, or specific gas station details) will be used to identify these calls for direct transfer. Shelley generally messages or texts details to Ben.",
+  "non_emergency_routing_rules": "During office hours, Clara will handle non-emergency calls from new clients, small jobs, and general service calls. After hours, for all non-emergency calls (and non-GNM emergencies), callers will be informed that the company will respond the next business day.",
+  "call_transfer_rules": "Initially, calls will forward from Ben's main line to Clara if Ben does not answer or declines (this conditional forwarding is enabled for Android devices). Once Ben's second personal phone number is active, Clara will be the primary contact. If a caller requests to speak with Ben (or a live person), Clara will obtain the purpose of the call and then transfer the call to Ben's second number. Clara will mention service call pricing ($150 for the first half-hour, then $49 per subsequent half-hour) only if specifically asked by the caller.",
+  "integration_constraints": "",
+  "after_hours_flow_summary": "For GNM Pressure Washing, emergency calls related to their managed gas stations (Chevron, Esso) will be patched directly to Ben. For all other callers, Clara will state that the company will get back to them on the next business day.",
+  "office_hours_flow_summary": "Clara will act as the first point of contact for new clients, small jobs, and general service calls. If callers request to speak with Ben, Clara will obtain the call's purpose and transfer to Ben's second number. Clara will provide service call pricing if prompted by the caller.",
+  "questions_or_unknowns": [
+    "Timezone for business hours.",
+    "Physical office address.",
+    "Confirmation of services supported by Ben's Electric Solutions Team (e.g., purely electrical services, or other services mentioned for GNM Pressure Washing as well?).",
+    "Specific definition of an emergency for Ben's Electric Solutions Team (beyond the GNM client).",
+    "Ben's second phone number for call transfers.",
+    "Specific property details for GNM Pressure Washing (customer name, property names, addresses, primary contact details including email and phone number for Shelley) are needed to identify emergency calls for their specific properties/contacts."
+  ],
+  "notes": "Ben uses an Android phone, enabling conditional call forwarding. Notifications for new calls will be sent via email to info@benselectricsolutionsteam.com and via SMS to his main business line. His main phone line will remain active for outbound calls and texts. Initial implementation will involve a calibration period to optimize call filtering and routing."
+}

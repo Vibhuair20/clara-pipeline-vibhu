@@ -1,0 +1,29 @@
+{
+  "account_id": "benselectricsolutions",
+  "company_name": "Ben's Electric Solutions Team",
+  "business_hours": "Monday to Friday, 8:00 AM to 4:30 PM (local time)",
+  "office_address": null,
+  "services_supported": [
+    "Electrical service calls",
+    "New client inquiries",
+    "Small job inquiries"
+  ],
+  "emergency_definition": [
+    "Calls from existing builders/property managers (specifically GNM Pressure Washing managing Chevron/ESSO gas stations) requiring immediate attention after business hours."
+  ],
+  "emergency_routing_rules": "During office hours, not specified. After hours, emergency calls from GNM Pressure Washing (for Chevron/ESSO gas stations) will be patched directly through to Ben on his second number. For all other customers, calls will be handled on the next business day.",
+  "non_emergency_routing_rules": "During office hours, Clara will act as the first point of contact. Initially, if Ben does not answer or declines, the call forwards to Clara. Once Ben's second number is active, Clara will be the primary handler for all calls, and non-emergency calls needing to speak with Ben will be transferred to his second number. After hours, non-emergency calls from all customers other than GNM Pressure Washing will be informed that they will be contacted on the next business day.",
+  "call_transfer_rules": "Clara can transfer calls if a caller explicitly requests to speak with Ben. Initially, Ben will forward unanswered/declined calls from his main line to Clara. Once Ben's second number is set up, Clara will be the first point of contact and will transfer calls to Ben's second number when required. No specific timeouts or retry logic mentioned. What to say if transfer fails is not specified.",
+  "integration_constraints": "None explicitly mentioned.",
+  "after_hours_flow_summary": "For calls from specific existing builders/property managers (GNM Pressure Washing for Chevron/ESSO gas stations), calls will be patched directly to Ben's second number for emergencies. For all other calls, the agent will inform callers that they will be contacted on the next business day.",
+  "office_hours_flow_summary": "Clara will be the first point of contact. Initially, calls will be forwarded to Clara if Ben does not answer or declines from his main line. Once Ben's second personal number is active, Clara will handle all incoming calls, screening them. If a caller wishes to speak with Ben, Clara will transfer the call to his second number. The service call fee ($115) and hourly rate ($98/hr in 30-minute increments) will be mentioned if explicitly asked by the caller.",
+  "questions_or_unknowns": [
+    "Exact timezone for business hours (8 AM - 4:30 PM).",
+    "Specific definition of what qualifies as an 'emergency' for GNM Pressure Washing's gas stations.",
+    "Physical office address for Ben's Electric Solutions Team.",
+    "What the agent should say if a call transfer to Ben fails.",
+    "Details on transfer timeouts or retries for call forwarding.",
+    "Are there other specific services Ben's Electric Solutions Team offers besides electrical service calls, new client inquiries, and small job inquiries?"
+  ],
+  "notes": "Ben has signed the Docusign. Billing card details are being processed. Ben is getting a second phone number for personal use and transfers. Clara will send email notifications to info@benselectricsolutionsteam.com and SMS notifications to Ben's main number for new calls. Ben uses an Android phone. Pricing for service calls is a $115 call-out fee (to get to site) plus $98/hour charged in half-hour increments. Pricing information should be mentioned only when asked by the caller. A follow-up call is scheduled for Friday at 2:00 PM (local time) to review test calls and dashboard features."
+}

@@ -1,0 +1,20 @@
+# API Keys and Secrets
+.env
+
+# Python Environments
+venv/
+env/
+__pycache__/
+*.pyc
+
+# IDEs
+.vscode/
+.idea/
+*.code-workspace
+
+# Ignore the actual large recordings if desired, or keep them if part of the dataset submission.
+# Given the instructions "plug in the dataset files", it's safer to just provide the code and let them drop the inputs in, or provide a single demo txt if it's small.
+# But for now, we will track the sample text files and ignore large M4A files to keep the repo clean.
+*.m4a
+*.mp3
+*.wav

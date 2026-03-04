@@ -1,0 +1,76 @@
+{
+    "name": "Clara Answers Zero Cost Extraction Pipeline",
+    "nodes": [
+        {
+            "parameters": {
+                "rule": {
+                    "interval": [
+                        {
+                            "field": "minutes",
+                            "interval": 15
+                        }
+                    ]
+                }
+            },
+            "name": "Cron Trigger (Every 15 min)",
+            "type": "n8n-nodes-base.cron",
+            "typeVersion": 1,
+            "position": [
+                250,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "command": "python scripts/batch_run.py"
+            },
+            "name": "Execute Pipeline",
+            "type": "n8n-nodes-base.executeCommand",
+            "typeVersion": 1,
+            "position": [
+                450,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "workspace": "my_workspace",
+                "project": "clara_answers_pipeline",
+                "name": "=Pipeline Execution: {{$json.execution_id}} completed with stdout: {{$json.stdout}}"
+            },
+            "name": "Asana Tracker",
+            "type": "n8n-nodes-base.asana",
+            "typeVersion": 1,
+            "position": [
+                650,
+                300
+            ]
+        }
+    ],
+    "connections": {
+        "Cron Trigger (Every 15 min)": {
+            "main": [
+                [
+                    {
+                        "node": "Execute Pipeline",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Execute Pipeline": {
+            "main": [
+                [
+                    {
+                        "node": "Asana Tracker",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    },
+    "active": false,
+    "settings": {}
+}
