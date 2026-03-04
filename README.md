@@ -81,19 +81,15 @@ outputs/
 To execute the automation flow using n8n:
 
 1. **Local Run Steps (Docker Compose)**:
-   You can run n8n instantly using this standard docker command:
+   A `docker-compose.yml` file is included in the root directory. To spin up n8n instantly, simply ensure your Docker daemon is running and execute:
    ```bash
-   docker run -it --rm \
-     --name n8n \
-     -p 5678:5678 \
-     -v ~/.n8n:/home/node/.n8n \
-     docker.n8n.io/n8nio/n8n
+   docker compose up -d
    ```
 
 2. **Environment Variables**:
    Your n8n environment needs access to:
-   - `GEMINI_API_KEY`: Your free-tier Gemini API Key.
-   - `PYTHONPATH`: The path to the root of this repository so the Execute Command nodes can call the python scripts.
+   - `GEMINI_API_KEY`: Sourced automatically if you place it in a `.env` file in the root directory.
+   - The current directory is automatically mounted to `/workspace` inside the container so the Execute Command nodes can call the python scripts.
 
 3. **Workflow Import Steps**:
    - Open your local n8n instance at `http://localhost:5678`.
