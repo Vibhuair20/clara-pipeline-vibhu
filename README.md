@@ -119,4 +119,5 @@ To execute the automation flow using n8n:
    4. Copy the value of `"system_prompt"` and paste it into the Retell **"Agent Prompt"** text box.
    5. Scroll down to **"Tools"** and click "Add Tool" -> "Transfer Call". Configure it using the logic printed in the `"call_transfer_protocol"` JSON field.
    6. Choose the `"voice_style"` referenced in the JSON to match the desired persona.
-   7. Click **Save**. Your agent is now ready to receive calls!
+   7. Click **Save**. Your agent is now ready!
+   8. Click the **"Test Chat"** or **"Web Call"** button on the right side of the screen to interact with the agent verifying the extracted logic.
