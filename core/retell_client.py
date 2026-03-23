@@ -23,27 +23,47 @@ class RetellClient:
             # Mock an agent ID
             return "ag_mock_" + os.urandom(4).hex()
             
-        print("  [RETELL API] Executing real API request to create agent...")
-        url = f"{self.base_url}/create-agent"
-        
-        # Structure the payload as expected by a Single Prompt Agent in Retell
-        payload = {
-            "name": agent_spec.get("agent_name", "Clara Answers Agent"),
-            "voice_id": agent_spec.get("voice_style", "11labs-Adrian"),
-            "system_prompt": agent_spec.get("system_prompt", "")
+        print("  [RETELL API] Executing real API request to create Retell LLM...")
+        llm_url = f"{self.base_url}/create-retell-llm"
+        llm_payload = {
+            "general_prompt": agent_spec.get("system_prompt", "")
         }
         
-        req = urllib.request.Request(url, data=json.dumps(payload).encode('utf-8'), method="POST")
-        req.add_header("Authorization", f"Bearer {self.api_key}")
-        req.add_header("Content-Type", "application/json")
-        
         try:
+            req = urllib.request.Request(llm_url, data=json.dumps(llm_payload).encode('utf-8'), method="POST")
+            req.add_header("Authorization", f"Bearer {self.api_key}")
+            req.add_header("Content-Type", "application/json")
+            
             with urllib.request.urlopen(req) as response:
                 result = json.loads(response.read().decode())
-                return result.get("agent_id", "unknown_agent_id")
+                llm_id = result.get("llm_id")
+                
+            print(f"  [RETELL API] LLM created: {llm_id}. Now creating Agent...")
+            
+            agent_url = f"{self.base_url}/create-agent"
+            agent_payload = {
+                "agent_name": agent_spec.get("agent_name", "Clara Answers Agent"),
+                "voice_id": agent_spec.get("voice_style", "11labs-Adrian"),
+                "response_engine": {
+                    "type": "retell-llm",
+                    "llm_id": llm_id
+                }
+            }
+            req2 = urllib.request.Request(agent_url, data=json.dumps(agent_payload).encode('utf-8'), method="POST")
+            req2.add_header("Authorization", f"Bearer {self.api_key}")
+            req2.add_header("Content-Type", "application/json")
+            
+            with urllib.request.urlopen(req2) as response2:
+                result2 = json.loads(response2.read().decode())
+                return result2.get("agent_id", "unknown_agent_id")
+                
         except urllib.error.HTTPError as e:
-            print(f"  [RETELL API ERROR] {e.code}: {e.reason}")
-            print("  [MOCK CLARA] Falling back to Mock ID due to missing payment/credits.")
+            try:
+                error_body = e.read().decode()
+                print(f"  [RETELL API ERROR] {e.code}: {error_body}")
+            except:
+                print(f"  [RETELL API ERROR] {e.code}: {e.reason}")
+            print("  [MOCK CLARA] Falling back to Mock ID due to API block.")
             return "ag_mock_" + os.urandom(4).hex()
         except Exception as e:
             print(f"  [RETELL API ERROR] {e}")
@@ -52,27 +72,42 @@ class RetellClient:
     def update_agent(self, agent_id: str, agent_spec: Dict[str, Any]) -> bool:
         """
         Updates an existing agent programmatically via Retell API.
+        We have to update the LLM attached to the agent.
         """
         if not self.api_key or "mock" in agent_id:
             print(f"  [MOCK CLARA] Mocking Retell Agent Update for ID: {agent_id}")
             return True
             
-        print(f"  [RETELL API] Executing real API request to update agent {agent_id}...")
-        url = f"{self.base_url}/update-agent/{agent_id}"
-        
-        payload = {
-            "system_prompt": agent_spec.get("system_prompt", "")
-        }
-        
-        req = urllib.request.Request(url, data=json.dumps(payload).encode('utf-8'), method="PATCH")
-        req.add_header("Authorization", f"Bearer {self.api_key}")
-        req.add_header("Content-Type", "application/json")
-        
+        print(f"  [RETELL API] Executing real API request to fetch agent {agent_id}...")
         try:
+            # Need to get the agent to find its llm_id
+            url = f"{self.base_url}/get-agent/{agent_id}"
+            req = urllib.request.Request(url, method="GET")
+            req.add_header("Authorization", f"Bearer {self.api_key}")
+            
             with urllib.request.urlopen(req) as response:
-                return response.status in [200, 204]
+                agent_data = json.loads(response.read().decode())
+                llm_id = agent_data.get("response_engine", {}).get("llm_id")
+                
+            if llm_id:
+                print(f"  [RETELL API] Updating LLM {llm_id} attached to agent...")
+                update_url = f"{self.base_url}/update-retell-llm/{llm_id}"
+                payload = {
+                    "general_prompt": agent_spec.get("system_prompt", "")
+                }
+                req2 = urllib.request.Request(update_url, data=json.dumps(payload).encode('utf-8'), method="PATCH")
+                req2.add_header("Authorization", f"Bearer {self.api_key}")
+                req2.add_header("Content-Type", "application/json")
+                with urllib.request.urlopen(req2) as response2:
+                    return response2.status in [200, 204]
+            return False
+            
         except urllib.error.HTTPError as e:
-            print(f"  [RETELL API ERROR] {e.code}: {e.reason}")
+            try:
+                error_body = e.read().decode()
+                print(f"  [RETELL API ERROR] {e.code}: {error_body}")
+            except:
+                print(f"  [RETELL API ERROR] {e.code}: {e.reason}")
             print("  [MOCK CLARA] Successfully applied mock update.")
             return True
         except Exception as e:
