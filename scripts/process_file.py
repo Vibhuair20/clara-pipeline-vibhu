@@ -1,7 +1,13 @@
 import argparse
 import os
 import json
+import sys
 from pathlib import Path
+
+# Add the project root to sys.path so 'core' can be found when run from anywhere
+base_dir = str(Path(__file__).parent.parent)
+if base_dir not in sys.path:
+    sys.path.insert(0, base_dir)
 
 from core.extractor import extract_account_memo
 from core.agent_builder import build_agent_spec
@@ -17,21 +23,10 @@ def process_pipeline(input_file: str, call_type: str, output_dir: str = "outputs
         print(f"Error: {file_path} not found.")
         return
 
-    # In a full production system, we'd extract the account_id early.
-    # For now, we use a placeholder or let Gemini derive it, then use that to save it.
-    print(f"[{call_type.upper()}] Processing: {input_file}...")
-    
-    # Check if we have an existing v1 memo if this is an onboarding call
+    account_id = "unknown_account"
     previous_memo = None
-    account_id = "unknown_account" # We'll determine this from the extraction
     
     if call_type.lower() == "onboarding":
-        # We need a way to find the right previous memo. In a real system we'd use a DB.
-        # Here we'll do a naive approach by extracting it first, getting the account_id, 
-        # and then re-running if needed, or we just extract assuming it's an onboarding call 
-        # and see if there is an existing v1 for that account.
-        
-        # Step 1: Initial extraction just to get the account identity
         print("Extracting identity to match with previous records...")
         temp_memo = extract_account_memo(str(file_path))
         account_id = temp_memo.account_id
@@ -75,6 +70,28 @@ def process_pipeline(input_file: str, call_type: str, output_dir: str = "outputs
     
     print(f"Saved {version} Memo -> {memo_path}")
     print(f"Saved {version} Agent Spec -> {spec_path}")
+
+    # Automate Retell API Integration (Real or Mocked)
+    from core.retell_client import RetellClient
+    retell = RetellClient()
+    spec_dict = json.loads(agent_spec.model_dump_json())
+    meta_path = Path(output_dir) / "accounts" / account_id / "retell_meta.json"
+    
+    if version == "v1":
+        print("Pushing preliminary configuration to Retell API...")
+        agent_id = retell.create_agent(spec_dict)
+        with open(meta_path, "w") as f:
+            json.dump({"retell_agent_id": agent_id}, f, indent=2)
+    else:
+        print("Pushing onboarding updates to existing Retell Agent...")
+        if meta_path.exists():
+            with open(meta_path, "r") as f:
+                meta = json.load(f)
+            agent_id = meta.get("retell_agent_id")
+            if agent_id:
+                retell.update_agent(agent_id, spec_dict)
+        else:
+            print("  [WARNING] No existing Retell Agent found to update.")
 
     # Generate Differ Changelog
     if call_type.lower() == "onboarding" and previous_memo:
