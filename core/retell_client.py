@@ -43,7 +43,7 @@ class RetellClient:
             agent_url = f"{self.base_url}/create-agent"
             agent_payload = {
                 "agent_name": agent_spec.get("agent_name", "Clara Answers Agent"),
-                "voice_id": agent_spec.get("voice_style", "11labs-Adrian"),
+                "voice_id": "11labs-Adrian",
                 "response_engine": {
                     "type": "retell-llm",
                     "llm_id": llm_id
