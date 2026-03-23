@@ -1,0 +1,28 @@
+{
+  "account_id": "bens-electric-solutions-team",
+  "company_name": "Ben's Electric Solutions Team",
+  "business_hours": "Monday to Friday, 8:00 AM to 4:30 PM",
+  "office_address": null,
+  "services_supported": [
+    "New client inquiries",
+    "Small jobs",
+    "Service calls"
+  ],
+  "emergency_definition": [
+    "Calls from existing builders",
+    "Calls from G&M Pressure Washing (property management for gas stations operating 24/7) requiring emergency assistance after hours"
+  ],
+  "emergency_routing_rules": "For calls from G&M Pressure Washing (property management for gas stations) after hours, the call should be patched through directly to Ben.",
+  "non_emergency_routing_rules": "For everyone else after hours, Clara will state that they will get back to the caller the next business day.",
+  "call_transfer_rules": "Clara can transfer calls to Ben's second phone number if a caller specifically requests to speak to him.",
+  "integration_constraints": "None specified.",
+  "after_hours_flow_summary": "For calls from G&M Pressure Washing (property management for gas stations), after-hours emergencies will be patched through to Ben. For all other calls, Clara will inform callers that someone will get back to them on the next business day.",
+  "office_hours_flow_summary": "Ben's main business line will forward calls to Clara. Clara will handle inquiries from new clients, small jobs, and general service calls. If a caller specifically asks about the service call fee, Clara will mention that there is a $115 call-out fee to get to the job site, and then an hourly charge of $98/hour for residential services, billed in half-hour increments after the initial call-out. If a caller requests to speak to Ben, Clara will transfer the call to his second number (once available). Ben will still be able to make outbound calls and receive text messages directly on his main line.",
+  "questions_or_unknowns": [
+    "Office address of Ben's Electric Solutions Team",
+    "Timezone for business hours",
+    "Ben's second phone number for transfers",
+    "Specific contact details for Shelley and/or G&M Pressure Washing, including all managed gas station properties"
+  ],
+  "notes": "The setup involves forwarding Ben's main business line to Clara. Clara can be activated/deactivated by Ben forwarding/un-forwarding calls on his Android phone. Post-call notifications (SMS and email to info@benselectricsolutionsteam.com) will be set up. A follow-up meeting is scheduled for Friday at 2:00 PM to review testing and dashboard usage, lasting less than 30 minutes (ideally 15-20 minutes)."
+}

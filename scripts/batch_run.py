@@ -2,6 +2,8 @@ import os
 import subprocess
 from pathlib import Path
 
+import sys
+
 def run_batch():
     """
     Looks for files in inputs/demo/ and inputs/onboarding/
@@ -19,13 +21,16 @@ def run_batch():
     if not demo_dir.exists() or not onboarding_dir.exists():
         print("Please create inputs/demo and inputs/onboarding folders and place your recordings/transcripts in them.")
         return
+    # Determine the safest python executable to use (force virtual environment if available)
+    venv_python = base_dir / "venv" / "bin" / "python3"
+    python_cmd = str(venv_python) if venv_python.exists() else sys.executable
 
     # Process all demos (v1)
     print("=== Processing DEMO calls (v1) ===")
     demo_files = list(demo_dir.glob("*"))
     for f in demo_files:
         if f.is_file() and not f.name.startswith("."):
-            cmd = ["python", str(process_script), str(f), "--type", "demo"]
+            cmd = [python_cmd, str(process_script), str(f), "--type", "demo"]
             print(f"\nRunning: {' '.join(cmd)}")
             subprocess.run(cmd)
             
@@ -34,13 +39,13 @@ def run_batch():
     onboarding_files = list(onboarding_dir.glob("*"))
     for f in onboarding_files:
         if f.is_file() and not f.name.startswith("."):
-            cmd = ["python", str(process_script), str(f), "--type", "onboarding"]
+            cmd = [python_cmd, str(process_script), str(f), "--type", "onboarding"]
             print(f"\nRunning: {' '.join(cmd)}")
             subprocess.run(cmd)
 
     print("\nBatch processing complete. Generating summary_metrics.json for the Dashboard...")
 
-    # Bonus: Generate summary_metrics.json for the Dashboard UI
+    # Generate summary_metrics.json for the Dashboard UI
     import json
     metrics = {
         "metrics": {

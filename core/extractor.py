@@ -6,9 +6,6 @@ from google import genai
 from google.genai import types
 from .models import AccountMemo
 
-# Make sure GEMINI_API_KEY is natively set in the environment or passed when creating the client
-# If not present, throw a clear error
-
 def extract_account_memo(file_path: str, previous_memo: AccountMemo = None) -> AccountMemo:
     """
     Extracts an AccountMemo from a transcript or audio file.

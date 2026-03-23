@@ -1,0 +1,37 @@
+{
+  "account_id": "benselectricsolutions",
+  "company_name": "Ben's Electric Solutions",
+  "business_hours": "Standard hours start at 8am. Days and end time not specified.",
+  "office_address": null,
+  "services_supported": [
+    "outlet replacements",
+    "aluminum wiring mitigation",
+    "hot tub hookups (electrical side)",
+    "EV chargers",
+    "panel changes",
+    "generator connections (electrical side)",
+    "troubleshooting",
+    "renovations",
+    "small jobs",
+    "odd jobs",
+    "new custom home projects",
+    "tenant infill/improvement projects",
+    "LED lighting upgrades"
+  ],
+  "emergency_definition": [
+    "calls from regular property managers",
+    "calls from general contractors",
+    "gas station pumps going down"
+  ],
+  "emergency_routing_rules": "For defined emergencies (regular property managers, general contractors, gas station pump breakdowns), Ben is the one on call. If someone calls with an emergency, Clara automatically gets the call to Ben or whoever is configured.",
+  "non_emergency_routing_rules": "Clara will answer most business calls, screen them, take information, summarize it in the dashboard, and send notifications via email and text. Ben or a team member can then review and assign. Certain pre-configured personal numbers (e.g., wife) or 'long, very strong, relationship driven customers' can bypass screening and route directly to Ben.",
+  "call_transfer_rules": "Clara can smart escalate calls to specific departments (e.g., accounting for invoice objections) or to specific team members (e.g., person A, then person B, then person C if A is unavailable). For calls asking to speak to Ben directly, Clara will screen by asking what it's about unless configured otherwise.",
+  "integration_constraints": "None explicitly stated regarding Clara's functional integration, other than Jobber integration is 'in process' and Clara acts as a 'system of action' rather than replacing CRM/calendar systems.",
+  "after_hours_flow_summary": "Clara can handle calls after hours. If Ben is not available, Clara responds, takes messages, and schedules jobs for the next working day (e.g., after 8am). Emergency calls for specific clients (property managers/gas stations) route directly to Ben.",
+  "office_hours_flow_summary": "Clara answers calls, screens them, takes down job details (name, address, issue, preferred time/date), provides general process overviews or estimates (e.g., for hot tub wiring), and up-sells club memberships. All details are logged to a dashboard with email/text notifications. Clara can handle multiple calls simultaneously and filters out irrelevant sales calls. For bookings, Clara will log preferred times/dates and can suggest times, but does not directly confirm appointments into Jobber's calendar due to uncertainty of job end times.",
+  "questions_or_unknowns": [
+    "Specific days of the week for business hours were not provided.",
+    "The physical office address was not explicitly stated. A billing address (17119 Sundown Road, S.E. Calgary, Alberta, T 2X3D4) was provided, but it's unclear if this is also the physical office address."
+  ],
+  "notes": "Ben is a sole proprietor electrician with 30 years experience, operating his business for 8 years. He is focused on growth, adding a third company van, and hiring an operations manager/estimator named Greg to help with office work and estimating. Currently has three journeymen and one apprentice, plus two subcontractors. Uses Jobber for CRM. Had a negative past experience with a live virtual assistant and a phone system app that generated spam-like numbers. Likes the idea of Clara answering most business calls. The agreed starter plan is $249/month for 500 minutes (excluding sales filtration calls) on a three-month upfront payment plan. Clara is used most during holiday seasons to handle calls and book appointments for when the office reopens."
+}
